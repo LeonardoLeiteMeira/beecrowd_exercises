@@ -8,6 +8,7 @@
             "name": "dart_console",
             "request": "launch",
             "type": "dart",
+            "program": "./lib/{program_file_here.dart}"
         }
     ]
 }
