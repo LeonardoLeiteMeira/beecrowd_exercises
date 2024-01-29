@@ -45,6 +45,9 @@ bool solution(List<List<String>> grid) {
 
   for (var i = 0; i < grid.length; i++) {
     for (var j = 0; j < grid[i].length; j++) {
+      if (grid[i][j] == '.') {
+        continue;
+      }
       var addRowSuccess = rows[i].add(grid[i][j]);
       var addColumnSuccess = columns[j].add(grid[i][j]);
 
@@ -52,61 +55,31 @@ bool solution(List<List<String>> grid) {
         return false;
       }
 
-      if (i >= 0 && i <= 2 && j >= 0 && j <= 2) {
-        var success = subGroups[0].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-      if (i >= 0 && i <= 2 && j >= 3 && j <= 5) {
-        var success = subGroups[1].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-      if (i >= 0 && i <= 2 && j >= 6 && j <= 8) {
-        var success = subGroups[2].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
+      var subGroupIndex = -1;
+
+      if (i <= 2 && j <= 2) {
+        subGroupIndex = 0;
+      } else if (i <= 2 && j <= 5) {
+        subGroupIndex = 1;
+      } else if (i <= 2 && j <= 8) {
+        subGroupIndex = 2;
+      } else if (i <= 5 && j <= 2) {
+        subGroupIndex = 3;
+      } else if (i <= 5 && j <= 5) {
+        subGroupIndex = 4;
+      } else if (i <= 5 && j <= 8) {
+        subGroupIndex = 5;
+      } else if (i <= 8 && j <= 2) {
+        subGroupIndex = 6;
+      } else if (i <= 8 && j <= 5) {
+        subGroupIndex = 7;
+      } else if (i <= 8 && j <= 8) {
+        subGroupIndex = 8;
       }
 
-      if (i >= 3 && i <= 5 && j >= 0 && j <= 2) {
-        var success = subGroups[3].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-      if (i >= 3 && i <= 5 && j >= 3 && j <= 5) {
-        var success = subGroups[4].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-      if (i >= 3 && i <= 5 && j >= 6 && j <= 8) {
-        var success = subGroups[5].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-
-      if (i >= 6 && i <= 8 && j >= 0 && j <= 2) {
-        var success = subGroups[6].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-      if (i >= 6 && i <= 8 && j >= 3 && j <= 5) {
-        var success = subGroups[7].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
-      }
-      if (i >= 6 && i <= 8 && j >= 6 && j <= 8) {
-        var success = subGroups[8].add(grid[i][j]);
-        if (!success) {
-          return false;
-        }
+      var success = subGroups[subGroupIndex].add(grid[i][j]);
+      if (!success) {
+        return false;
       }
     }
   }
